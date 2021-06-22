@@ -4,7 +4,6 @@ out vec4 outputColor;
 
 void main()
 {
-	float lerpValue = gl_FragCoord.y / 500.0f;
-
-	outputColor = mix(vec4(1.0f, 0.0f, 0.0f, 1.0f), vec4(0.0f, 1.0f, 0.0f, 1.0f), lerpValue);
+	vec2 normCoords = gl_FragCoord.xy / 500.0f;
+	outputColor = vec4(normCoords, 0.5f, 1.0f);
 }
