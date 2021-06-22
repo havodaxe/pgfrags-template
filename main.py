@@ -2,9 +2,12 @@ import sys,os
 import pygame as pg
 from OpenGL import GL
 
-VERTICES = [ 0.75, 0.75, 0.0, 1.0,
-             0.75,-0.75, 0.0, 1.0,
-            -0.75,-0.75, 0.0, 1.0]
+VERTICES = [ 1.0,  1.0,  0.0,  1.0,
+             1.0, -1.0,  0.0,  1.0,
+            -1.0, -1.0,  0.0,  1.0,
+            -1.0, -1.0,  0.0,  1.0,
+            -1.0,  1.0,  0.0,  1.0,
+             1.0,  1.0,  0.0,  1.0 ]
 
 SIZE_FLOAT = VERT_COMPONENTS = 4
 
