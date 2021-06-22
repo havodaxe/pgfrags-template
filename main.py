@@ -55,7 +55,7 @@ class GLtests:
         if not status:
             log = GL.glGetShaderInfoLog(shader)
             shader_name = SHADER2STRING[shader_type]
-            raise ShaderException,"Compile failure in {} shader:\n{}\n".format(shader_name,log)
+            raise (ShaderException,"Compile failure in {} shader:\n{}\n".format(shader_name,log))
         return shader
 
     def link(self):
@@ -63,7 +63,7 @@ class GLtests:
         status = GL.glGetProgramiv(self.shader,GL.GL_LINK_STATUS)
         if not status:
             log = GL.glGetProgramInfoLog(self.shader)
-            raise ShaderException,"Linking failue:\n{}\n".format(log)
+            raise (ShaderException,"Linking failue:\n{}\n".format(log))
 
     def display(self):
         GL.glClearColor(1,1,1,1)
