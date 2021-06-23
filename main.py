@@ -12,7 +12,6 @@ VERTICES = [ 1.0,  1.0,  0.0,  1.0,
 SIZE_FLOAT = VERT_COMPONENTS = 4
 
 SHADER2STRING = {GL.GL_VERTEX_SHADER   : "vertex",
-                 GL.GL_GEOMETRY_SHADER : "geometry",
                  GL.GL_FRAGMENT_SHADER : "fragment"}
 
 #Load shaders from files.
