@@ -99,7 +99,7 @@ def main():
                 pass
         MyGL.display()
         pg.display.flip()
-        MyClock.tick(65)
+        MyClock.tick(60)
 
 if __name__ == '__main__':
     main()
