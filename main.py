@@ -2,6 +2,8 @@ import sys,os
 import pygame as pg
 from OpenGL import GL
 
+RESOLUTION = (500,500)
+
 VERTICES = [ 1.0,  1.0,  0.0,  1.0,
              1.0, -1.0,  0.0,  1.0,
             -1.0, -1.0,  0.0,  1.0,
@@ -25,7 +27,7 @@ class GLtests:
         self.shader = GL.glCreateProgram()
         self.vbo = None
         self.init_all()
-        self.reshape(500,500)
+        self.reshape(*RESOLUTION)
     def init_all(self):
         self.attach_shaders()
         self.init_vertex_buf()
@@ -77,7 +79,7 @@ class GLtests:
         GL.glVertexAttribPointer(0,VERT_COMPONENTS,GL.GL_FLOAT,False,0,None)
         GL.glDrawArrays(GL.GL_TRIANGLES, 0, len(VERTICES)//VERT_COMPONENTS)
         GL.glDisableVertexAttribArray(0)
-        GL.glUseProgram(0)
+        #GL.glUseProgram(0)
 
     def reshape(self,width,height):
         GL.glViewport(0,0,width,height)
@@ -88,7 +90,7 @@ class ShaderException(Exception):
 def main():
     pg.init()
     os.environ['SDL_VIDEO_CENTERED'] = '1'
-    SCREEN = pg.display.set_mode((500,500),pg.HWSURFACE|pg.OPENGL|pg.DOUBLEBUF)
+    SCREEN = pg.display.set_mode(RESOLUTION,pg.HWSURFACE|pg.OPENGL|pg.DOUBLEBUF)
     MyClock = pg.time.Clock()
     MyGL = GLtests()
     while 1:
@@ -98,6 +100,9 @@ def main():
             elif event.type == pg.KEYDOWN:
                 pass
         MyGL.display()
+        resUniformLoc = GL.glGetUniformLocation(MyGL.shader, "resolution")
+        GL.glUniform2f(resUniformLoc, *SCREEN.get_size())
+        GL.glUseProgram(0)
         pg.display.flip()
         MyClock.tick(60)
 
