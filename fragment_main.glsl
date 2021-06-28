@@ -8,9 +8,7 @@ uniform float elapsedTime;
 void main()
 {
   vec2 normCoords = gl_FragCoord.xy / resolution;
-  float oddTrue = mod(floor(elapsedTime), 2);
-  float evenTrue = mod(floor(elapsedTime) + 1, 2);
-  float goingUp = fract(elapsedTime) * oddTrue;
-  float goingDown = (1 - fract(elapsedTime)) * evenTrue;
-  outputColor = vec4(normCoords, goingUp + goingDown, 1.0f);
+  float sineTime = sin(elapsedTime);
+  // sin(x)^2 ranges between 0 and 1
+  outputColor = vec4(normCoords, sineTime * sineTime, 1.0f);
 }
