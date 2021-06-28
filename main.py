@@ -1,6 +1,8 @@
 import sys,os
 import pygame as pg
 from OpenGL import GL
+from time import time
+from math import floor
 
 RESOLUTION = (500,500)
 
@@ -93,15 +95,19 @@ def main():
     SCREEN = pg.display.set_mode(RESOLUTION,pg.HWSURFACE|pg.OPENGL|pg.DOUBLEBUF)
     MyClock = pg.time.Clock()
     MyGL = GLtests()
+    start_time = time()
     while 1:
         for event in pg.event.get():
             if event.type==pg.QUIT or (event.type==pg.KEYDOWN and event.key==pg.K_ESCAPE):
+                print(time() - start_time)
                 pg.quit();sys.exit()
             elif event.type == pg.KEYDOWN:
                 pass
         MyGL.display()
         resUniformLoc = GL.glGetUniformLocation(MyGL.shader, "resolution")
+        timeUniformLoc = GL.glGetUniformLocation(MyGL.shader, "elapsedTime")
         GL.glUniform2f(resUniformLoc, *SCREEN.get_size())
+        GL.glUniform1f(timeUniformLoc, time() - start_time)
         GL.glUseProgram(0)
         pg.display.flip()
         MyClock.tick(60)
